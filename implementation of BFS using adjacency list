@@ -1,0 +1,72 @@
+#include<stdio.h>
+#define max 15
+int q[max],front=-1,rear=-1,adj[max][max],visited[max],n,i,k;
+void creategraph()
+{
+        int ch,v1,v2;
+        printf("enter no. of vertices");
+        scanf("%d",&n);
+        do
+        {
+            printf("enter the edges");
+            scanf("%d%d",&v1,&v2);
+            adj[v1][v2]=1;
+            printf("enter 1 to continue");
+            scanf("%d",&ch);
+        }while(ch==1);
+}
+int dequeue()
+{
+     int ele=q[front];
+     if(front==rear)
+     {
+        front=-1;
+        rear=-1;
+     }
+     else
+        front++;
+     return ele;
+}
+void enqueue(int ele)
+{
+     if(front==-1)
+        front++;
+     rear++;
+     q[rear]=ele;
+}
+void display(){
+    int i,j;
+    for(i=0;i<=n;i++)
+    {
+        for(j=0;j<=n;j++){
+            printf("%d",adj[i]);
+        }
+        printf("\n");
+    }
+}
+void BFS(int v)
+{
+     printf("%d",v);
+     visited[v]=1;
+     enqueue(v);
+     while(front!=-1)
+     {
+        k=dequeue();
+        for(i=1;i<=n;i++)
+           if(adj[k][i]==1)
+                if(visited[i]==0)
+                {
+                    printf("%d",i);
+                    visited[i]=1;
+                    enqueue(i);
+                }
+      }
+}
+main()
+{
+    creategraph();
+    display();
+    for(i=1;i<=n;i++)
+        if(visited[i]==0)
+             BFS(i);
+}
