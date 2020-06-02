@@ -1,0 +1,55 @@
+#include <bits/stdc++.h> 
+using namespace std; 
+typedef pair<int,int> p;
+void dijikstra_algorithm(vector<p> adj[],int s,int n) 
+{
+    int i,dist[n],visit[n];
+    for(i=0;i<n;i++)
+    {
+        dist[i]=INT_MAX;
+        visit[i]=0;
+    }
+    priority_queue<p,vector<p>,greater<p>> pq;
+    pq.push(make_pair(0,s));
+    dist[s]=0;
+    visit[s]=1;
+    while(pq.empty()==false)
+    {
+        int u=pq.top().second;
+        pq.pop();
+        visit[u]=1;
+        for(auto ii:adj[u])
+        {
+            int v=ii.first;
+            int w=ii.second;
+            if(dist[v]>dist[u]+w && visit[v]==0)
+            {
+                dist[v]=dist[u]+w;
+                pq.push(make_pair(dist[v],v));
+            }
+        }
+    }
+    for(i=0;i<n;i++)
+        cout<<i<<"   "<<dist[i]<<endl;
+}
+int main()
+{
+    int n,s,e,m,i,w;
+    cout<<"No of vertices:"<<endl;
+    cin>>n;
+    vector<p> adj[n];
+    cout<<"No of edges:"<<endl;
+    cin>>m;
+    for(i=1;i<=m;i++)
+    {
+        cout<<"starting vertex"<<endl;
+        cin>>s;
+        cout<<"ending vertex:"<<endl;
+        cin>>e;
+        cout<<"weight:"<<endl;
+        cin>>w;
+        adj[s].push_back(make_pair(e,w));
+        adj[e].push_back(make_pair(s,w));
+    }
+    dijikstra_algorithm(adj,0,n);
+}
