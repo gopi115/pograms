@@ -1,0 +1,12 @@
+t=int(input())
+for _ in range(t):
+    n=int(input())
+    l1=[0]*n
+    l2=[0]*n
+    for i in range(n):
+        x,y=map(int,input().split())
+        l1[i]=x
+        l2[i]=y
+    max1=abs(max(l1)-min(l1))
+    max2=abs(max(l2)-min(l2))
+    print(max(max1,max2)**2)
