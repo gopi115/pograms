@@ -1,0 +1,24 @@
+from collections import Counter
+l=[]
+t=[]
+ans=''
+def find(t):
+    x=t.most_common(1)[0]
+    min1=x[0]
+    x=x[1]
+    for i in t.keys():
+        if(t[i]==x):
+            min1=min(min1,i)
+    return min1
+n,m=map(int,input().split())
+for _ in range(n):
+    l.append(input())
+for i in range(m):
+    t.append([])
+for i in range(n):
+    for j in range(m):
+        t[j].append(l[i][j])
+for i in range(m):
+    t[i]=Counter(t[i])
+    ans+=find(t[i])
+print(ans)
