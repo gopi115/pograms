@@ -1,0 +1,25 @@
+n=int(input())
+l=list(map(int,input().split()))
+m=int(input())
+s=[]
+for i in range(n):
+    s.append(sum(l[0:i+1]))
+for _ in range(m):
+    t=int(input())
+    flag=1
+    if t>max(s):
+        print(-1)
+    elif t==max(s):
+        print(n)
+    elif t in s:
+        print(s.index(t)+1)
+    else:
+        for i in range(n):
+            if(s[i]>=t):
+                flag=0
+                break
+        if(flag):
+            print(-1)
+        else:
+            print(i+1)
+    
