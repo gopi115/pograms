@@ -1,0 +1,26 @@
+def find(s):
+    n=len(s)
+    l=[[0]*(n+1)]*(n+1)
+    a,b,m=0,0,[]
+    for i in range(1,n+1):
+        for j in range(i+1,n+1):
+            if s[i-1]==s[j-1] and l[i-1][j-1]<(j-i):
+                l[i][j]=l[i-1][j-1]+1
+                if(l[i][j]>a):
+                    a=l[i][j]
+                    b=max(b,i)
+                else:
+                    l[i][j]=0
+    if a>0:
+        for i in range(b-a+1,b+1):
+            m.append(s[i-1])
+    ans=n-(2*(len(m)))
+    return ans
+t=int(input())
+for _ in range(t):
+    s=input()
+    n=find(s)
+    if len(s)!=n:
+        print("Yes")
+    else:
+        print("No")
