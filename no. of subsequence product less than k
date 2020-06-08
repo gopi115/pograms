@@ -1,0 +1,28 @@
+#include<stdio.h>
+int fun(int a[],int n,int k){  
+    int dp[k+1][n+1],i,j; 
+	for(i=0;i<=k;i++)
+		for(j=0;j<=n;j++)
+			dp[i][j]=0;
+    for(i=1;i<=k;i++){ 
+        for(j=1;j<=n;j++){
+            dp[i][j]=dp[i][j-1]; 
+            if(a[j-1]<=i && a[j-1]>0)
+                dp[i][j]+=dp[i/a[j-1]][j-1]+1; 
+        } 
+    } 
+    return dp[k][n]; 
+}
+   
+int main(){
+	int n,k;
+	printf("size: ");
+	scanf("%d",&n);
+	int a[n],i;
+	printf("array elements: ");
+	for(i=0;i<n;i++)
+		scanf("%d",&a[i]);
+	printf("value K :");
+	scanf("%d",&k);
+	printf("no of sub less than k :%d",fun(a,n,k));  
+}
